@@ -46,18 +46,18 @@ async function deletePost(id) {
 }
 exports.deletePost = deletePost;
 async function searchPost(search) {
-    return new Promise((resolve) => {
-        const filteredPosts = posts.filter((item) => {
-            const textMatch = item.text.includes(search.text);
-            const tagMatch = !search.filter_by_tag || item.hashtags.includes(search.filter_by_tag);
-            return textMatch && tagMatch;
-        });
-        if (search.sort_by_likes == "yes") {
-            const sortedPosts = filteredPosts.sort(({ likes: a }, { likes: b }) => b - a);
-            resolve(sortedPosts);
-        }
-        resolve(filteredPosts);
+    //return new Promise((resolve) => {
+    const filteredPosts = posts.filter((item) => {
+        const textMatch = item.text.includes(search.text);
+        const tagMatch = !search.filter_by_tag || item.hashtags.includes(search.filter_by_tag);
+        return textMatch && tagMatch;
     });
+    if (search.sort_by_likes == "yes") {
+        const sortedPosts = filteredPosts.sort(({ likes: a }, { likes: b }) => b - a);
+        return (sortedPosts);
+    }
+    return (filteredPosts);
+    // });
 }
 exports.searchPost = searchPost;
 //# sourceMappingURL=posts.models.js.map

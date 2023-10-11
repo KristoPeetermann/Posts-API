@@ -52,7 +52,6 @@ export async function deletePost(id:number): Promise<void> {
     posts.splice(id,1);
 }
 export async function searchPost(search:stringType): Promise<Post[]>{
-    return new Promise((resolve) => {
         const filteredPosts = posts.filter((item) => {
             const textMatch = item.text.includes(search.text);
             const tagMatch = !search.filter_by_tag || item.hashtags.includes(search.filter_by_tag);
@@ -60,8 +59,7 @@ export async function searchPost(search:stringType): Promise<Post[]>{
         });
         if(search.sort_by_likes == "yes"){
             const sortedPosts = filteredPosts.sort(({likes:a},{likes:b}) => b-a);
-            resolve(sortedPosts);
+            return(sortedPosts);
         }
-        resolve(filteredPosts);
-    });
+        return(filteredPosts);
 }
