@@ -34,9 +34,7 @@ function searchPost(fastify) {
         },
         handler: async (request, reply) => {
             const text = request.query;
-            const filterByTag = request.query;
-            const sortByLikes = request.query;
-            const posts = await postsController.searchPost(text, filterByTag, sortByLikes);
+            const posts = await postsController.searchPost(text);
             if (!posts) {
                 reply.code(404).send(posts);
             }

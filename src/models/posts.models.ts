@@ -51,14 +51,14 @@ export async function createPost(post:postBodyType
 export async function deletePost(id:number): Promise<void> {
     posts.splice(id,1);
 }
-export async function searchPost(search:stringType, filterByTag?: stringType, sortByLikes?: stringType): Promise<Post[]>{
+export async function searchPost(search:stringType): Promise<Post[]>{
     return new Promise((resolve) => {
         const filteredPosts = posts.filter((item) => {
             const textMatch = item.text.includes(search.text);
-            const tagMatch = !filterByTag ||!filterByTag.filter_by_tag || item.hashtags.includes(filterByTag.filter_by_tag);
+            const tagMatch = !search.filter_by_tag ||search.filter_by_tag || item.hashtags.includes(search.filter_by_tag);
             return textMatch && tagMatch;
         });
-        if(sortByLikes?.sort_by_likes == "yes"){
+        if(search.sort_by_likes == "yes"){
             const sortedPosts = filteredPosts.sort(({likes:a},{likes:b}) => b-a);
             resolve(sortedPosts);
         }

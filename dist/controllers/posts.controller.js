@@ -63,7 +63,7 @@ async function createPost(post) {
 exports.createPost = createPost;
 async function searchPost(search, filterByTag, sortByLikes) {
     try {
-        return await postModel.searchPost(search, filterByTag, sortByLikes);
+        return await postModel.searchPost(search);
     }
     catch (error) {
         throw new Error("oh no");

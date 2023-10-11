@@ -12,9 +12,7 @@ export default function searchPost(fastify:FastifyInstance): RouteOptions {
         },
         handler: async (request, reply) =>{
             const text = request.query as stringType;
-            const filterByTag = request.query as stringType;
-            const sortByLikes = request.query as stringType;
-            const posts= await postsController.searchPost(text, filterByTag, sortByLikes);
+            const posts= await postsController.searchPost(text);
             if(!posts){
                 reply.code(404).send(posts);
             }else{

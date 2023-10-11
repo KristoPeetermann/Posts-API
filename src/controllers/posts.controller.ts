@@ -32,7 +32,7 @@ export async function createPost(post: postBodyType){
 }
 export async function searchPost(search: stringType, filterByTag?: stringType ,sortByLikes?: stringType){
     try{
-        return await postModel.searchPost(search, filterByTag, sortByLikes);
+        return await postModel.searchPost(search);
     }catch (error){
         throw new Error("oh no")
     }
