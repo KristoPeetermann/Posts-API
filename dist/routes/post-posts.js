@@ -1,0 +1,48 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const postsController = __importStar(require("../controllers/posts.controller"));
+const posts_schemas_1 = require("./schemas/posts.schemas");
+function createPost(fastify) {
+    return {
+        method: 'POST',
+        url: '/api/posts',
+        schema: {
+            body: posts_schemas_1.postBodySchema
+        },
+        handler: async (request, reply) => {
+            const body = request.body;
+            const posts = await postsController.createPost(body);
+            if (!posts) {
+                reply.code(201).send({ posts });
+            }
+            else {
+                reply.code(400).send({ posts });
+            }
+        },
+    };
+}
+exports.default = createPost;
+//# sourceMappingURL=post-posts.js.map
