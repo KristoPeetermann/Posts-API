@@ -55,7 +55,7 @@ export async function searchPost(search:stringType): Promise<Post[]>{
     return new Promise((resolve) => {
         const filteredPosts = posts.filter((item) => {
             const textMatch = item.text.includes(search.text);
-            const tagMatch = !search.filter_by_tag ||search.filter_by_tag || item.hashtags.includes(search.filter_by_tag);
+            const tagMatch = !search.filter_by_tag || item.hashtags.includes(search.filter_by_tag);
             return textMatch && tagMatch;
         });
         if(search.sort_by_likes == "yes"){
